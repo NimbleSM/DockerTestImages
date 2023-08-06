@@ -45,14 +45,56 @@ RUN pip install clingo
 RUN mkdir -p /opt/ && cd /opt/ && git clone --depth 1 --branch "v0.20.1" https://github.com/spack/spack.git
 RUN . /opt/spack/share/spack/setup-env.sh && spack compiler find
 RUN . /opt/spack/share/spack/setup-env.sh && spack external find --not-buildable && spack external list
-RUN mkdir -p /opt/spack-environment
-ADD ./spack-depends-serial.yml /opt/spack-environment/spack-serial.yaml
-RUN mv /opt/spack-environment/spack-serial.yaml /opt/spack-environment/spack.yaml
-# create pre_nimble environment from spack.yaml and concretize
-RUN cd /opt/spack-environment \
-  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble /opt/spack-environment/spack.yaml\
-  && spack env activate pre_nimble && spack concretize && spack env deactivate
-# make nimble env from lock
-RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble /opt/spack/var/spack/environments/pre_nimble/spack.lock
-# activate nimble env and install
-RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble && spack install --fail-fast && spack gc -y
+
+## Create all serial spack environments
+## Make serial nimble env
+RUN mkdir -p /opt/spack-nimble-env-serial
+ADD ./spack-serial.yaml /opt/spack-nimble-env-serial/spack-serial.yaml
+RUN mv /opt/spack-nimble-env-serial/spack-serial.yaml /opt/spack-nimble-env-serial/spack.yaml
+# create pre_nimble-serial environment from spack.yaml and concretize
+RUN cd /opt/spack-nimble-env-serial \
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-serial /opt/spack-nimble-env-serial/spack.yaml\
+  && spack env activate pre_nimble-serial && spack concretize && spack env deactivate
+# make nimble-serial env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-serial /opt/spack/var/spack/environments/pre_nimble-serial/spack.lock
+# activate nimble-serial env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-serial && spack install --fail-fast && spack gc -y && spack env deactivate
+
+## Make serial+Trilinos nimble env
+RUN mkdir -p /opt/spack-nimble-env-serial-trilinos
+ADD ./spack-serial-trilinos.yaml /opt/spack-nimble-env-serial-trilinos/spack-serial-trilinos.yaml
+RUN mv /opt/spack-nimble-env-serial-trilinos/spack-serial-trilinos.yaml /opt/spack-nimble-env-serial-trilinos/spack.yaml
+# create pre_nimble-serial-trilinos environment from spack.yaml and concretize
+RUN cd /opt/spack-nimble-env-serial-trilinos \
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-serial-trilinos /opt/spack-nimble-env-serial-trilinos/spack.yaml\
+  && spack env activate pre_nimble-serial-trilinos && spack concretize && spack env deactivate
+# make nimble-serial-trilinos env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-serial-trilinos /opt/spack/var/spack/environments/pre_nimble-serial-trilinos/spack.lock
+# activate nimble-serial-trilinos env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-serial-trilinos && spack install --fail-fast && spack gc -y && spack env deactivate
+
+## Make serial+Kokkos nimble env
+RUN mkdir -p /opt/spack-nimble-env-serial-kokkos
+ADD ./spack-serial-kokkos.yaml /opt/spack-nimble-env-serial-kokkos/spack-serial-kokkos.yaml
+RUN mv /opt/spack-nimble-env-serial-kokkos/spack-serial-kokkos.yaml /opt/spack-nimble-env-serial-kokkos/spack.yaml
+# create pre_nimble-serial-kokkos environment from spack.yaml and concretize
+RUN cd /opt/spack-nimble-env-serial-kokkos \
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-serial-kokkos /opt/spack-nimble-env-serial-kokkos/spack.yaml\
+  && spack env activate pre_nimble-serial-kokkos && spack concretize && spack env deactivate
+# make nimble-serial-kokkos env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-serial-kokkos /opt/spack/var/spack/environments/pre_nimble-serial-kokkos/spack.lock
+# activate nimble-serial-kokkos env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-serial-kokkos && spack install --fail-fast && spack gc -y && spack env deactivate
+
+## Make serial+Kokkos+ArborX nimble env
+RUN mkdir -p /opt/spack-nimble-env-serial-kokkos-arborx
+ADD ./spack-serial-kokkos-arborx.yaml /opt/spack-nimble-env-serial-kokkos-arborx/spack-serial-kokkos-arborx.yaml
+RUN mv /opt/spack-nimble-env-serial-kokkos-arborx/spack-serial-kokkos-arborx.yaml /opt/spack-nimble-env-serial-kokkos-arborx/spack.yaml
+# create pre_nimble-serial-kokkos-arborx environment from spack.yaml and concretize
+RUN cd /opt/spack-nimble-env-serial-kokkos-arborx \
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-serial-kokkos-arborx /opt/spack-nimble-env-serial-kokkos-arborx/spack.yaml\
+  && spack env activate pre_nimble-serial-kokkos-arborx && spack concretize && spack env deactivate
+# make nimble-serial-kokkos-arborx env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-serial-kokkos-arborx /opt/spack/var/spack/environments/pre_nimble-serial-kokkos-arborx/spack.lock
+# activate nimble-serial-kokkos-arborx env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-serial-kokkos-arborx && spack install --fail-fast && spack gc -y && spack env deactivate

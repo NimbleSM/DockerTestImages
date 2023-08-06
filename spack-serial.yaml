@@ -1,0 +1,15 @@
+spack:
+  definitions:
+    - compilers: [gcc@11.4.0]
+    - packages:
+        - seacas@2022-10-14 -x11 -mpi ^hdf5@1.14.1 ^fmt@9.1.0
+  specs:
+    - matrix:
+        - [$packages]
+        - [$%compilers]
+        - [arch=linux-ubuntu20.04-x86_64_v3]
+  concretizer:
+    unify: true
+  config:
+    install_tree: /opt/software
+  view: /opt/view

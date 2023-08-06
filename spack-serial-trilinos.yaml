@@ -2,7 +2,7 @@ spack:
   definitions:
     - compilers: [gcc@11.4.0]
     - packages:
-      - seacas@2022-10-14 -x11 -mpi ^hdf5@1.14.1 ^fmt@9.1.0
+        - trilinos@13.2.0 +openmp +exodus -mpi ^hdf5~mpi
   specs:
     - matrix:
         - [$packages]
