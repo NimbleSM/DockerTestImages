@@ -54,53 +54,53 @@ RUN . /opt/spack/share/spack/setup-env.sh && spack external find --not-buildable
 RUN mkdir -p /opt/spack-nimble-env-serial
 ADD ./spack-serial.yaml /opt/spack-nimble-env-serial/spack-serial.yaml
 RUN mv /opt/spack-nimble-env-serial/spack-serial.yaml /opt/spack-nimble-env-serial/spack.yaml
-# create pre_nimble-serial environment from spack.yaml and concretize
+# create pre_NimbleSMSerial environment from spack.yaml and concretize
 RUN cd /opt/spack-nimble-env-serial \
-  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-serial /opt/spack-nimble-env-serial/spack.yaml\
-  && spack env activate pre_nimble-serial && spack concretize && spack env deactivate
-# make nimble-serial env from lock
-RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-serial /opt/spack/var/spack/environments/pre_nimble-serial/spack.lock
-# activate nimble-serial env and install
-RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-serial && spack install --fail-fast && spack gc -y && spack env deactivate
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_NimbleSMSerial /opt/spack-nimble-env-serial/spack.yaml\
+  && spack env activate pre_NimbleSMSerial && spack concretize && spack env deactivate
+# make NimbleSMSerial env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create NimbleSMSerial /opt/spack/var/spack/environments/pre_NimbleSMSerial/spack.lock
+# activate NimbleSMSerial env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate NimbleSMSerial && spack install --fail-fast && spack gc -y && spack env deactivate
 
 ## Make serial+Trilinos nimble env
 RUN mkdir -p /opt/spack-nimble-env-serial-trilinos
 ADD ./spack-serial-trilinos.yaml /opt/spack-nimble-env-serial-trilinos/spack-serial-trilinos.yaml
 RUN mv /opt/spack-nimble-env-serial-trilinos/spack-serial-trilinos.yaml /opt/spack-nimble-env-serial-trilinos/spack.yaml
-# create pre_nimble-serial-trilinos environment from spack.yaml and concretize
+# create pre_NimbleSMSerial+Trilinos environment from spack.yaml and concretize
 RUN cd /opt/spack-nimble-env-serial-trilinos \
-  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-serial-trilinos /opt/spack-nimble-env-serial-trilinos/spack.yaml\
-  && spack env activate pre_nimble-serial-trilinos && spack concretize && spack env deactivate
-# make nimble-serial-trilinos env from lock
-RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-serial-trilinos /opt/spack/var/spack/environments/pre_nimble-serial-trilinos/spack.lock
-# activate nimble-serial-trilinos env and install
-RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-serial-trilinos && spack install --fail-fast && spack gc -y && spack env deactivate
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_NimbleSMSerial+Trilinos /opt/spack-nimble-env-serial-trilinos/spack.yaml\
+  && spack env activate pre_NimbleSMSerial+Trilinos && spack concretize && spack env deactivate
+# make NimbleSMSerial+Trilinos env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create NimbleSMSerial+Trilinos /opt/spack/var/spack/environments/pre_NimbleSMSerial+Trilinos/spack.lock
+# activate NimbleSMSerial+Trilinos env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate NimbleSMSerial+Trilinos && spack install --fail-fast && spack gc -y && spack env deactivate
 
 ## Make serial+Kokkos nimble env
 RUN mkdir -p /opt/spack-nimble-env-serial-kokkos
 ADD ./spack-serial-kokkos.yaml /opt/spack-nimble-env-serial-kokkos/spack-serial-kokkos.yaml
 RUN mv /opt/spack-nimble-env-serial-kokkos/spack-serial-kokkos.yaml /opt/spack-nimble-env-serial-kokkos/spack.yaml
-# create pre_nimble-serial-kokkos environment from spack.yaml and concretize
+# create pre_NimbleSMSerial+Kokkos environment from spack.yaml and concretize
 RUN cd /opt/spack-nimble-env-serial-kokkos \
-  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-serial-kokkos /opt/spack-nimble-env-serial-kokkos/spack.yaml\
-  && spack env activate pre_nimble-serial-kokkos && spack concretize && spack env deactivate
-# make nimble-serial-kokkos env from lock
-RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-serial-kokkos /opt/spack/var/spack/environments/pre_nimble-serial-kokkos/spack.lock
-# activate nimble-serial-kokkos env and install
-RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-serial-kokkos && spack install --fail-fast && spack gc -y && spack env deactivate
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_NimbleSMSerial+Kokkos /opt/spack-nimble-env-serial-kokkos/spack.yaml\
+  && spack env activate pre_NimbleSMSerial+Kokkos && spack concretize && spack env deactivate
+# make NimbleSMSerial+Kokkos env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create NimbleSMSerial+Kokkos /opt/spack/var/spack/environments/pre_NimbleSMSerial+Kokkos/spack.lock
+# activate NimbleSMSerial+Kokkos env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate NimbleSMSerial+Kokkos && spack install --fail-fast && spack gc -y && spack env deactivate
 
 ## Make serial+Kokkos+ArborX nimble env
 RUN mkdir -p /opt/spack-nimble-env-serial-kokkos-arborx
 ADD ./spack-serial-kokkos-arborx.yaml /opt/spack-nimble-env-serial-kokkos-arborx/spack-serial-kokkos-arborx.yaml
 RUN mv /opt/spack-nimble-env-serial-kokkos-arborx/spack-serial-kokkos-arborx.yaml /opt/spack-nimble-env-serial-kokkos-arborx/spack.yaml
-# create pre_nimble-serial-kokkos-arborx environment from spack.yaml and concretize
+# create pre_NimbleSMSerial+Kokkos+ArborX environment from spack.yaml and concretize
 RUN cd /opt/spack-nimble-env-serial-kokkos-arborx \
-  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-serial-kokkos-arborx /opt/spack-nimble-env-serial-kokkos-arborx/spack.yaml\
-  && spack env activate pre_nimble-serial-kokkos-arborx && spack concretize && spack env deactivate
-# make nimble-serial-kokkos-arborx env from lock
-RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-serial-kokkos-arborx /opt/spack/var/spack/environments/pre_nimble-serial-kokkos-arborx/spack.lock
-# activate nimble-serial-kokkos-arborx env and install
-RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-serial-kokkos-arborx && spack install --fail-fast && spack gc -y && spack env deactivate
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_NimbleSMSerial+Kokkos+ArborX /opt/spack-nimble-env-serial-kokkos-arborx/spack.yaml\
+  && spack env activate pre_NimbleSMSerial+Kokkos+ArborX && spack concretize && spack env deactivate
+# make NimbleSMSerial+Kokkos+ArborX env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create NimbleSMSerial+Kokkos+ArborX /opt/spack/var/spack/environments/pre_NimbleSMSerial+Kokkos+ArborX/spack.lock
+# activate NimbleSMSerial+Kokkos+ArborX env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate NimbleSMSerial+Kokkos+ArborX && spack install --fail-fast && spack gc -y && spack env deactivate
 
 
 
@@ -111,50 +111,50 @@ RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-serial-ko
 RUN mkdir -p /opt/spack-nimble-env-mpi
 ADD ./spack-mpi.yaml /opt/spack-nimble-env-mpi/spack-mpi.yaml
 RUN mv /opt/spack-nimble-env-mpi/spack-mpi.yaml /opt/spack-nimble-env-mpi/spack.yaml
-# create pre_nimble-mpi environment from spack.yaml and concretize
+# create pre_NimbleSMMPI environment from spack.yaml and concretize
 RUN cd /opt/spack-nimble-env-mpi \
-  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-mpi /opt/spack-nimble-env-mpi/spack.yaml\
-  && spack env activate pre_nimble-mpi && spack concretize && spack env deactivate
-# make nimble-mpi env from lock
-RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-mpi /opt/spack/var/spack/environments/pre_nimble-mpi/spack.lock
-# activate nimble-mpi env and install
-RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-mpi && spack install --fail-fast && spack gc -y && spack env deactivate
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_NimbleSMMPI /opt/spack-nimble-env-mpi/spack.yaml\
+  && spack env activate pre_NimbleSMMPI && spack concretize && spack env deactivate
+# make NimbleSMMPI env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create NimbleSMMPI /opt/spack/var/spack/environments/pre_NimbleSMMPI/spack.lock
+# activate NimbleSMMPI env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate NimbleSMMPI && spack install --fail-fast && spack gc -y && spack env deactivate
 
 ## Make mpi+Trilinos nimble env
 RUN mkdir -p /opt/spack-nimble-env-mpi-trilinos
 ADD ./spack-mpi-trilinos.yaml /opt/spack-nimble-env-mpi-trilinos/spack-mpi-trilinos.yaml
 RUN mv /opt/spack-nimble-env-mpi-trilinos/spack-mpi-trilinos.yaml /opt/spack-nimble-env-mpi-trilinos/spack.yaml
-# create pre_nimble-mpi-trilinos environment from spack.yaml and concretize
+# create pre_NimbleSMMPI+Trilinos environment from spack.yaml and concretize
 RUN cd /opt/spack-nimble-env-mpi-trilinos \
-  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-mpi-trilinos /opt/spack-nimble-env-mpi-trilinos/spack.yaml\
-  && spack env activate pre_nimble-mpi-trilinos && spack concretize && spack env deactivate
-# make nimble-mpi-trilinos env from lock
-RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-mpi-trilinos /opt/spack/var/spack/environments/pre_nimble-mpi-trilinos/spack.lock
-# activate nimble-mpi-trilinos env and install
-RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-mpi-trilinos && spack install --fail-fast && spack gc -y && spack env deactivate
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_NimbleSMMPI+Trilinos /opt/spack-nimble-env-mpi-trilinos/spack.yaml\
+  && spack env activate pre_NimbleSMMPI+Trilinos && spack concretize && spack env deactivate
+# make NimbleSMMPI+Trilinos env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create NimbleSMMPI+Trilinos /opt/spack/var/spack/environments/pre_NimbleSMMPI+Trilinos/spack.lock
+# activate NimbleSMMPI+Trilinos env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate NimbleSMMPI+Trilinos && spack install --fail-fast && spack gc -y && spack env deactivate
 
 ## Make mpi+Kokkos nimble env
 RUN mkdir -p /opt/spack-nimble-env-mpi-kokkos
 ADD ./spack-mpi-kokkos.yaml /opt/spack-nimble-env-mpi-kokkos/spack-mpi-kokkos.yaml
 RUN mv /opt/spack-nimble-env-mpi-kokkos/spack-mpi-kokkos.yaml /opt/spack-nimble-env-mpi-kokkos/spack.yaml
-# create pre_nimble-mpi-kokkos environment from spack.yaml and concretize
+# create pre_NimbleSMMPI+Kokkos environment from spack.yaml and concretize
 RUN cd /opt/spack-nimble-env-mpi-kokkos \
-  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-mpi-kokkos /opt/spack-nimble-env-mpi-kokkos/spack.yaml\
-  && spack env activate pre_nimble-mpi-kokkos && spack concretize && spack env deactivate
-# make nimble-mpi-kokkos env from lock
-RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-mpi-kokkos /opt/spack/var/spack/environments/pre_nimble-mpi-kokkos/spack.lock
-# activate nimble-mpi-kokkos env and install
-RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-mpi-kokkos && spack install --fail-fast && spack gc -y && spack env deactivate
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_NimbleSMMPI+Kokkos /opt/spack-nimble-env-mpi-kokkos/spack.yaml\
+  && spack env activate pre_NimbleSMMPI+Kokkos && spack concretize && spack env deactivate
+# make NimbleSMMPI+Kokkos env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create NimbleSMMPI+Kokkos /opt/spack/var/spack/environments/pre_NimbleSMMPI+Kokkos/spack.lock
+# activate NimbleSMMPI+Kokkos env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate NimbleSMMPI+Kokkos && spack install --fail-fast && spack gc -y && spack env deactivate
 
 ## Make mpi+Kokkos+ArborX nimble env
 RUN mkdir -p /opt/spack-nimble-env-mpi-kokkos-arborx
 ADD ./spack-mpi-kokkos-arborx.yaml /opt/spack-nimble-env-mpi-kokkos-arborx/spack-mpi-kokkos-arborx.yaml
 RUN mv /opt/spack-nimble-env-mpi-kokkos-arborx/spack-mpi-kokkos-arborx.yaml /opt/spack-nimble-env-mpi-kokkos-arborx/spack.yaml
-# create pre_nimble-mpi-kokkos-arborx environment from spack.yaml and concretize
+# create pre_NimbleSMMPI+Kokkos+ArborX environment from spack.yaml and concretize
 RUN cd /opt/spack-nimble-env-mpi-kokkos-arborx \
-  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_nimble-mpi-kokkos-arborx /opt/spack-nimble-env-mpi-kokkos-arborx/spack.yaml\
-  && spack env activate pre_nimble-mpi-kokkos-arborx && spack concretize && spack env deactivate
-# make nimble-mpi-kokkos-arborx env from lock
-RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-mpi-kokkos-arborx /opt/spack/var/spack/environments/pre_nimble-mpi-kokkos-arborx/spack.lock
-# activate nimble-mpi-kokkos-arborx env and install
-RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-mpi-kokkos-arborx && spack install --fail-fast && spack gc -y && spack env deactivate
+  && . /opt/spack/share/spack/setup-env.sh && spack env create pre_NimbleSMMPI+Kokkos+ArborX /opt/spack-nimble-env-mpi-kokkos-arborx/spack.yaml\
+  && spack env activate pre_NimbleSMMPI+Kokkos+ArborX && spack concretize && spack env deactivate
+# make NimbleSMMPI+Kokkos+ArborX env from lock
+RUN . /opt/spack/share/spack/setup-env.sh && spack env create NimbleSMMPI+Kokkos+ArborX /opt/spack/var/spack/environments/pre_NimbleSMMPI+Kokkos+ArborX/spack.lock
+# activate NimbleSMMPI+Kokkos+ArborX env and install
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate NimbleSMMPI+Kokkos+ArborX && spack install --fail-fast && spack gc -y && spack env deactivate
