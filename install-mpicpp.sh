@@ -1,7 +1,7 @@
 set -x
 
 . /opt/spack/share/spack/setup-env.sh
-spack env activate nimble
+spack env activate nimble-mpi-kokkos
 
 git clone https://github.com/sandialabs/mpicpp.git /opt/src/mpicpp
 cd /opt/src/mpicpp && git checkout db872e297a311a5ad361868d1f74e054b7877b68 && cd -

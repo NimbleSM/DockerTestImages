@@ -45,10 +45,11 @@ RUN pip install clingo
 # Now we install spack and find compilers/externals
 RUN mkdir -p /opt/ && cd /opt/ && git clone --depth 1 --branch "v0.20.1" https://github.com/spack/spack.git
 
+# Add current source dir into the image
+COPY . /opt/src/NimbleSMBaseImage
+
 # Apply our patch to get more up-to-date packages
-RUN mkdir -p /opt/patches/
-ADD ./arborx_spack_package.patch /opt/patches/arborx_spack_package.patch
-RUN cd /opt/spack && git apply /opt/patches/arborx_spack_package.patch
+RUN cd /opt/spack && git apply /opt/src/NimbleSMBaseImage/arborx_spack_package.patch
 
 RUN . /opt/spack/share/spack/setup-env.sh && spack compiler find
 RUN . /opt/spack/share/spack/setup-env.sh && spack external find --not-buildable && spack external list
@@ -94,7 +95,11 @@ RUN cd /opt/spack-nimble-env-mpi-kokkos \
 # make nimble-mpi-kokkos env from lock
 RUN . /opt/spack/share/spack/setup-env.sh && spack env create nimble-mpi-kokkos /opt/spack/var/spack/environments/pre_nimble-mpi-kokkos/spack.lock
 # activate nimble-mpi-kokkos env and install
-RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-mpi-kokkos && spack install --fail-fast && spack gc -y
+RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-mpi-kokkos && spack install --fail-fast && spack gc -y && spack env deactivate
+
+# install mpicpp and p3a
+RUN bash /opt/src/NimbleSMBaseImage/install-mpicpp.sh
+RUN bash /opt/src/NimbleSMBaseImage/install-p3a.sh
 
 # install mpicpp and p3a here, as mpicpp requires mpi and p3a requires mpicpp and kokkos
 RUN mkdir -p /opt/install-scripts

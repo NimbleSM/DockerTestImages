@@ -1,7 +1,7 @@
 set -x
 
 . /opt/spack/share/spack/setup-env.sh
-spack env activate nimble
+spack env activate nimble-mpi-kokkos
 
 git clone https://github.com/sandialabs/p3a.git /opt/src/p3a
 cd /opt/src/p3a && git checkout ee33b596b16a3baba629859096bb42de00bb8bd3 && cd -
