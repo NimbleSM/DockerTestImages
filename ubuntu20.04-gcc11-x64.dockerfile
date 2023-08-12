@@ -101,15 +101,6 @@ RUN . /opt/spack/share/spack/setup-env.sh && spack env activate nimble-mpi-kokko
 RUN bash /opt/src/NimbleSMBaseImage/install-mpicpp.sh
 RUN bash /opt/src/NimbleSMBaseImage/install-p3a.sh
 
-# install mpicpp and p3a here, as mpicpp requires mpi and p3a requires mpicpp and kokkos
-RUN mkdir -p /opt/install-scripts
-ADD ./install-mpicpp.sh /opt/install-scripts/install-mpicpp.sh
-ADD ./install-p3a.sh /opt/install-scripts/install-p3a.sh
-RUN bash /opt/install-scripts/install-mpicpp.sh
-RUN bash /opt/install-scripts/install-p3a.sh
-
-RUN . /opt/spack/share/spack/setup-env.sh && spack env deactivate
-
 ## Make mpi+Kokkos+ArborX nimble env
 RUN mkdir -p /opt/spack-nimble-env-mpi-kokkos-arborx
 ADD ./spack-mpi-kokkos-arborx.yaml /opt/spack-nimble-env-mpi-kokkos-arborx/spack-mpi-kokkos-arborx.yaml
